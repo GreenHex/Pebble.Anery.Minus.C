@@ -1,0 +1,54 @@
+{
+    "author": "The Resetter",
+    "dependencies": {},
+    "keywords": [],
+    "name": "anery",
+    "pebble": {
+        "displayName": "Anery-",
+        "enableMultiJS": true,
+        "messageKeys": [],
+        "projectType": "native",
+        "resources": {
+            "media": [
+                {
+                    "file": "images/Anery Icon.png",
+                    "menuIcon": true,
+                    "name": "APP_ICON",
+                    "targetPlatforms": null,
+                    "type": "bitmap"
+                },
+                {
+                    "characterRegex": "[0-9]",
+                    "file": "fonts/BioRhymeExpanded-Regular-Mod.ttf",
+                    "name": "FONT_BIORHYME_EXPANDED_REGULAR_20",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite",
+                        "emery"
+                    ],
+                    "type": "font"
+                },
+                {
+                    "characterRegex": "[0-9]",
+                    "file": "fonts/BioRhyme-Regular-Mod.ttf",
+                    "name": "FONT_BIORHYME_REGULAR_20",
+                    "targetPlatforms": null,
+                    "type": "font"
+                }
+            ]
+        },
+        "sdkVersion": "3",
+        "targetPlatforms": [
+            "aplite",
+            "basalt",
+            "diorite",
+            "emery"
+        ],
+        "uuid": "52cd861b-aa10-4888-befb-5cba1b8972ea",
+        "watchapp": {
+            "watchface": true
+        }
+    },
+    "version": "1.0.0"
+}
