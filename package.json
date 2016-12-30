@@ -12,8 +12,8 @@
             "media": [
                 {
                     "characterRegex": "[A-Z]",
-                    "file": "fonts/ShareTechMono-Regular.ttf",
-                    "name": "FONT_SHARETECHMONO_REGULAR_16",
+                    "file": "fonts/Inconsolata-Regular.ttf",
+                    "name": "FONT_INCONSOLATA_REGULAR_16",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -57,10 +57,10 @@
             "diorite",
             "emery"
         ],
-        "uuid": "52cd861b-aa10-4888-befb-5cba1b8972ea",
+        "uuid": "049abcdd-23b0-4189-b616-c7a1bb91c9d1",
         "watchapp": {
             "watchface": true
         }
     },
-    "version": "1.0.0"
+    "version": "1.10.0"
 }

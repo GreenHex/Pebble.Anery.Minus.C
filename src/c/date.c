@@ -2,7 +2,7 @@
 // Copyright (C) 2016, Vinodh Kumar M. <GreenHex@gmail.com>
 //
 // Fonts:
-// https://fonts.google.com/specimen/Share+Tech+Mono
+// https://fonts.google.com/specimen/Inconsolata
 // https://fonts.google.com/specimen/BioRhyme
 // https://fonts.google.com/specimen/BioRhyme+Expanded
 //
@@ -24,7 +24,7 @@ static void outer_window_layer_update_proc( Layer *layer, GContext *ctx ) {
 }
 
 #define ALTERNATE_FONT
-#define DAY_FONT_NORMAL RESOURCE_ID_FONT_SHARETECHMONO_REGULAR_16
+#define DAY_FONT_NORMAL RESOURCE_ID_FONT_INCONSOLATA_REGULAR_16
 #define DATE_FONT_EXPANDED RESOURCE_ID_FONT_BIORHYME_EXPANDED_REGULAR_18
 #define DATE_FONT_NORMAL RESOURCE_ID_FONT_BIORHYME_REGULAR_18
 
@@ -40,9 +40,9 @@ static void date_text_layer_update_proc( Layer *layer, GContext *ctx ) {
   GColor text_colour = GColorBlack;
   #endif
 
-  // tm_time.tm_mday = 30;
+  // tm_time.tm_mday = 4;
   graphics_context_set_text_color( ctx, text_colour );
-  strftime( date_text, sizeof( date_text ), "%e", &tm_time );
+  snprintf( date_text, sizeof( date_text ), "%d", tm_time.tm_mday );
   
   #ifdef ALTERNATE_FONT
   GFont font = ( tm_time.tm_mday < 10 ) ?
@@ -72,7 +72,7 @@ static void day_text_layer_update_proc( Layer *layer, GContext *ctx ) {
   #else
   GColor text_colour = GColorBlack;
   #endif
-  tm_time.tm_wday = 3;
+  // tm_time.tm_wday = 0;
   graphics_context_set_text_color( ctx, text_colour );
   strftime( day_text, sizeof( day_text ), "%a", &tm_time );
   day_text[1] -= 32;
