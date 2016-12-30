@@ -24,6 +24,8 @@ typedef struct {
   GColor hand_colour;
   GColor hand_highlight_colour;
   GColor hand_outline_colour;
+  uint16_t center_dot_radius;
+  GColor center_dot_colour;
 } GPATH_HANDS_PARAMS;
 
 typedef struct {

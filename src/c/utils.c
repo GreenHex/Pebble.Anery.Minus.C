@@ -62,8 +62,8 @@ void draw_gpath_hands( GPATH_HANDS_PARAMS *pGP ) {
   graphics_context_set_stroke_color( pGP->ctx, pGP->hand_outline_colour );
   gpath_draw_outline( pGP->ctx, gpath );
   
-  graphics_context_set_fill_color( pGP->ctx, BACKGROUND_COLOUR );
-  graphics_fill_circle( pGP->ctx, pGP->center_pt, 2 );
+  graphics_context_set_fill_color( pGP->ctx, pGP->center_dot_colour );
+  graphics_fill_circle( pGP->ctx, pGP->center_pt, pGP->center_dot_radius );
   
   gpath_destroy( gpath );
   gpath_destroy( gpath_highlight );

@@ -11,6 +11,18 @@
         "resources": {
             "media": [
                 {
+                    "characterRegex": "[A-Z]",
+                    "file": "fonts/ShareTechMono-Regular.ttf",
+                    "name": "FONT_SHARETECHMONO_REGULAR_16",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite",
+                        "emery"
+                    ],
+                    "type": "font"
+                },
+                {
                     "file": "images/Anery Icon.png",
                     "menuIcon": true,
                     "name": "APP_ICON",
@@ -20,7 +32,7 @@
                 {
                     "characterRegex": "[0-9]",
                     "file": "fonts/BioRhymeExpanded-Regular-Mod.ttf",
-                    "name": "FONT_BIORHYME_EXPANDED_REGULAR_20",
+                    "name": "FONT_BIORHYME_EXPANDED_REGULAR_18",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
@@ -32,7 +44,7 @@
                 {
                     "characterRegex": "[0-9]",
                     "file": "fonts/BioRhyme-Regular-Mod.ttf",
-                    "name": "FONT_BIORHYME_REGULAR_20",
+                    "name": "FONT_BIORHYME_REGULAR_18",
                     "targetPlatforms": null,
                     "type": "font"
                 }

@@ -14,6 +14,8 @@
 #define CLOCK_DIAL_RECT ( GRect( CLOCK_DIAL_POS_X, CLOCK_DIAL_POS_Y, CLOCK_DIAL_SIZE_W, CLOCK_DIAL_SIZE_H ) )
 #define CLOCK_TICK_EDGE_OFFSET 3 /* make it an odd number */
 
+// #define USE_GPATH_SECONDS_HAND
+
 static GPathInfo PATH_TICK = {
   2, (GPoint []) {
     { 0, - ( CLOCK_DIAL_SIZE_W > CLOCK_DIAL_SIZE_H ? CLOCK_DIAL_SIZE_W : CLOCK_DIAL_SIZE_H ) },
@@ -61,6 +63,13 @@ static GPathInfo MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT = {
   }
 };
 
+static GPathInfo SECOND_HAND_POINTS = {
+  2, (GPoint []) {
+    { 0, 28 },
+    { 0, -74 }
+  }
+};
+
 #else
 
 static GPathInfo HOUR_HAND_SBGE001_POINTS = {
@@ -98,6 +107,13 @@ static GPathInfo MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT = {
     { -3, 14 },
     { -7, 0 },
     { 0, -61 },
+  }
+};
+
+static GPathInfo SECOND_HAND_POINTS = {
+  2, (GPoint []) {
+    { 0, 20 },
+    { 0, -61 }
   }
 };
 

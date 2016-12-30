@@ -16,7 +16,11 @@ static Layer *dial_layer = 0;
 static Layer *hours_layer = 0;
 static Layer *minutes_layer = 0;
 static Layer *seconds_layer = 0;
+#ifdef SHOW_SECONDS
+static bool show_seconds = true;
+#else
 static bool show_seconds = false;
+#endif
 static AppTimer *secs_display_apptimer = 0;
 
 static uint32_t const two_segments[] = { 200, 200, 200 };
@@ -61,7 +65,9 @@ static void hours_layer_update_proc( Layer *layer, GContext *ctx ) {
     .gpath_hand_highlight = &HOUR_HAND_SBGE001_POINTS_HIGHLIGHT,
     .hand_colour = HAND_COLOUR,
     .hand_highlight_colour = HAND_HIGHLIGHT_COLOUR,
-    .hand_outline_colour = HAND_OUTLINE_COLOUR
+    .hand_outline_colour = HAND_OUTLINE_COLOUR,
+    .center_dot_radius = 2,
+    .center_dot_colour = BACKGROUND_COLOUR
   } );
 }
 
@@ -78,10 +84,35 @@ static void minutes_layer_update_proc( Layer *layer, GContext *ctx ) {
     .gpath_hand_highlight = &MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT,
     .hand_colour = HAND_COLOUR,
     .hand_highlight_colour = HAND_HIGHLIGHT_COLOUR,
-    .hand_outline_colour = HAND_OUTLINE_COLOUR
+    .hand_outline_colour = HAND_OUTLINE_COLOUR,
+    .center_dot_radius = 2,
+    .center_dot_colour = BACKGROUND_COLOUR
   } );
 }
 
+#ifdef USE_GPATH_SECONDS_HAND
+static void seconds_layer_update_proc( Layer *layer, GContext *ctx ) {
+  if ( !show_seconds ) return;
+  
+  GRect bounds = layer_get_bounds( layer );
+  GPoint center_pt = grect_center_point( &bounds );
+  
+  uint32_t sec_angle = TRIG_MAX_ANGLE * tm_time.tm_sec / 60;
+    
+  draw_gpath_hands( & (GPATH_HANDS_PARAMS) { 
+    .ctx = ctx, 
+    .center_pt = center_pt, 
+    .angle = sec_angle, 
+    .gpath_hand = &SECOND_HAND_POINTS, 
+    .gpath_hand_highlight = &SECOND_HAND_POINTS,
+    .hand_colour = GColorRed,
+    .hand_highlight_colour = GColorRed,
+    .hand_outline_colour = GColorRed,
+    .center_dot_radius = 3,
+    .center_dot_colour = GColorBlack
+  } );
+}
+#else
 static void seconds_layer_update_proc( Layer *layer, GContext *ctx ) {
   if ( !show_seconds ) return;
   
@@ -122,7 +153,9 @@ static void seconds_layer_update_proc( Layer *layer, GContext *ctx ) {
   graphics_draw_line( ctx, sec_hand, sec_hand_tip );
   #endif
 }
+#endif
 
+#ifndef SHOW_SECONDS
 static void stop_seconds_display( void* data ) { // after timer elapses
   secs_display_apptimer = 0;
   show_seconds = false;
@@ -138,6 +171,7 @@ static void start_seconds_display( AccelAxisType axis, int32_t direction ) {
     secs_display_apptimer = app_timer_register( SHOW_SECONDS_TIMER_TIMEOUT_MS, stop_seconds_display, 0 );
   }
 }
+#endif
 
 static void unobstructed_change_proc( AnimationProgress progress, void *context ) {
   GRect uo_bounds = layer_get_unobstructed_bounds( (Layer *) context );
@@ -145,9 +179,9 @@ static void unobstructed_change_proc( AnimationProgress progress, void *context 
   layer_set_bounds( hours_layer, uo_bounds );
   layer_set_bounds( minutes_layer, uo_bounds );
   layer_set_bounds( seconds_layer, uo_bounds );
-  GRect date_window_frame = DATE_WINDOW_FRAME;
-  date_window_frame.origin.y = uo_bounds.origin.y + uo_bounds.size.h/2 - date_window_frame.size.h/2;
-  layer_set_frame( date_layer, date_window_frame );
+  GRect outer_window_frame = OUTER_WINDOW_FRAME;
+  outer_window_frame.origin.y = uo_bounds.origin.y + uo_bounds.size.h/2 - outer_window_frame.size.h/2;
+  layer_set_frame( outer_window_layer, outer_window_frame );
   GRect battery_gauge_frame = BATTERY_GAUGE_FRAME;
   battery_gauge_frame.origin.y = uo_bounds.origin.y + uo_bounds.size.h/2 - battery_gauge_frame.size.h/2;
   layer_set_frame( battery_layer, battery_gauge_frame );
@@ -177,7 +211,11 @@ void clock_init( Window* window ){
   layer_add_child( dial_layer, seconds_layer );
   
   unobstructed_area_service_subscribe( (UnobstructedAreaHandlers) { .change = unobstructed_change_proc }, window_layer );
+  #ifdef SHOW_SECONDS
+  tick_timer_service_subscribe( SECOND_UNIT, handle_clock_tick );
+  #else
   tick_timer_service_subscribe( MINUTE_UNIT, handle_clock_tick );
+  #endif
   accel_tap_service_subscribe( start_seconds_display );
   
   time_t now = time( NULL );
