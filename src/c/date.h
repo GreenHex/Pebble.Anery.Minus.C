@@ -6,7 +6,7 @@
 #include <pebble.h>
 #include "global.h"
 
-#define OUTER_WINDOW_OUTLINE_THK 2
+#define OUTER_WINDOW_OUTLINE_THK 3
 
 #define DAY_WINDOW_SIZE_W 24
 #define DAY_WINDOW_SIZE_H 16

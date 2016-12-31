@@ -34,7 +34,7 @@ static void date_text_layer_update_proc( Layer *layer, GContext *ctx ) {
   graphics_context_set_fill_color( ctx, GColorWhite );
   graphics_fill_rect( ctx, bounds, 0, GCornersAll );
   
-  #if defined(PBL_COLOR)
+  #if defined(PBL_COLOR_NO_COLOUR)
   GColor text_colour = ( tm_time.tm_wday == 0 ) ? GColorOrange : ( tm_time.tm_wday == 6 ) ? GColorBlueMoon : GColorBlack;
   #else
   GColor text_colour = GColorBlack;
