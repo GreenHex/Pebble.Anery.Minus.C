@@ -48,7 +48,7 @@ static GPathInfo MINUTE_HAND_SBGE001_POINTS = {
   5, (GPoint []) {
     { -3, 20 },
     { -9, 0 },
-    { 0, -77 },
+    { 0, -82 },
     { 9, 0 },
     { 3, 20 }
   }
@@ -59,7 +59,7 @@ static GPathInfo MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT = {
     { 0, 20 },
     { -3, 20 },
     { -9, 0 },
-    { 0, -77 },
+    { 0, -82 },
   }
 };
 
