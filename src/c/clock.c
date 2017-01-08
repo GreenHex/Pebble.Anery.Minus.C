@@ -215,7 +215,7 @@ void clock_init( Window* window ){
   layer_set_update_proc( seconds_layer, seconds_layer_update_proc );
   layer_add_child( dial_layer, seconds_layer );
   
-  start_animation( 0, 1000, AnimationCurveEaseOut );
+  start_animation( 0, 1000, AnimationCurveEaseInOut );
 }
 
 void implementation_teardown( Animation *animation ) {
