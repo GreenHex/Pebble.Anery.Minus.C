@@ -8,11 +8,12 @@
 #include "utils.h"
 #include "date.h"
 #include "battery.h"
+#include "animation.h"
 
 tm tm_time;
 
 static Layer *window_layer = 0;
-static Layer *dial_layer = 0;
+Layer *dial_layer = 0;
 static Layer *hours_layer = 0;
 static Layer *minutes_layer = 0;
 static Layer *seconds_layer = 0;
@@ -189,6 +190,10 @@ static void unobstructed_change_proc( AnimationProgress progress, void *context 
 }
 
 void clock_init( Window* window ){
+  
+  time_t now = time( NULL ) - ( 60 * 45 );
+  tm_time = *localtime( &now );
+  
   window_layer = window_get_root_layer( window );
   
   dial_layer = layer_create( CLOCK_DIAL_RECT );
@@ -210,7 +215,12 @@ void clock_init( Window* window ){
   layer_set_update_proc( seconds_layer, seconds_layer_update_proc );
   layer_add_child( dial_layer, seconds_layer );
   
+  start_animation( 0, 1000, AnimationCurveEaseOut );
+}
+
+void implementation_teardown( Animation *animation ) {
   unobstructed_area_service_subscribe( (UnobstructedAreaHandlers) { .change = unobstructed_change_proc }, window_layer );
+
   #ifdef SHOW_SECONDS
   tick_timer_service_subscribe( SECOND_UNIT, handle_clock_tick );
   #else

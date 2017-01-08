@@ -55,3 +55,4 @@
 #define SHOW_SECONDS_TIMER_TIMEOUT_MS ( 5 * 1000 )
 
 extern tm tm_time;
+extern Layer *dial_layer;
