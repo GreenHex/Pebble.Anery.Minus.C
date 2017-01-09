@@ -14,7 +14,7 @@ static uint32_t end_time_secs = 0;
 static void uint32_setter( void *subject, uint32_t uint32 ) {
   time_t now = (time_t) uint32;
   tm_time = *localtime( &now );
-  layer_mark_dirty( dial_layer );
+  layer_mark_dirty( (Layer *) subject );
 }
 
 static uint32_t uint32_getter( void *subject ) {
