@@ -138,7 +138,6 @@ static GPathInfo SECOND_HAND_POINTS = {
 #endif
 
 extern tm tm_time;
-extern Layer *dial_layer;
 
 void clock_init( Window* window );
 void clock_deinit( void );

@@ -13,7 +13,7 @@
 tm tm_time;
 
 static Layer *window_layer = 0;
-Layer *dial_layer = 0;
+static Layer *dial_layer = 0;
 static Layer *hours_layer = 0;
 static Layer *minutes_layer = 0;
 static Layer *seconds_layer = 0;
@@ -215,7 +215,7 @@ void clock_init( Window* window ){
   layer_set_update_proc( seconds_layer, seconds_layer_update_proc );
   layer_add_child( dial_layer, seconds_layer );
   
-  start_animation( 0, 1200, AnimationCurveEaseInOut );
+  start_animation( 0, 1200, AnimationCurveEaseInOut, (void *) dial_layer );
 }
 
 void implementation_teardown( Animation *animation ) {
@@ -230,6 +230,8 @@ void implementation_teardown( Animation *animation ) {
   
   time_t now = time( NULL );
   handle_clock_tick( localtime( &now ), 0 );
+
+  animation_destroy( animation );
 }
 
 void clock_deinit( void ){

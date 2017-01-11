@@ -7,7 +7,7 @@
 
 // #define DEBUG
 
-#define REVERSE
+// #define REVERSE
 #ifdef REVERSE
 
 #define BACKGROUND_COLOUR GColorWhite
@@ -55,4 +55,3 @@
 #define SHOW_SECONDS_TIMER_TIMEOUT_MS ( 5 * 1000 )
 
 extern tm tm_time;
-extern Layer *dial_layer;

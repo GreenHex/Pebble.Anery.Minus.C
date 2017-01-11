@@ -7,7 +7,6 @@
 #include "animation.h"
 
 extern void implementation_teardown( Animation *animation );
-extern Layer *dial_layer;
 static uint32_t start_time_secs = 0;
 static uint32_t end_time_secs = 0;
 
@@ -32,7 +31,7 @@ static const PropertyAnimationImplementation uint32_animation_implementation = {
   },
 };
 
-void start_animation( int delay_ms, int duration_ms, AnimationCurve anim_curve ) {
+void start_animation( int delay_ms, int duration_ms, AnimationCurve anim_curve, void *subject ) {
   static PropertyAnimation *uint32_prop_animation = 0;
   static Animation *uint32_animation = 0;
   
@@ -40,7 +39,7 @@ void start_animation( int delay_ms, int duration_ms, AnimationCurve anim_curve )
   start_time_secs = end_time_secs - ( 60 * 45 );
   
   uint32_prop_animation = property_animation_create( &uint32_animation_implementation, NULL, NULL, NULL );
-  property_animation_subject( uint32_prop_animation, (void *) &dial_layer, true );
+  property_animation_subject( uint32_prop_animation, (void *) &subject, true );
   property_animation_from( uint32_prop_animation, (void *) &( start_time_secs ), sizeof( start_time_secs ), true );
   property_animation_to( uint32_prop_animation, (void *) &( end_time_secs ), sizeof( end_time_secs ), true );
   uint32_animation = property_animation_get_animation( uint32_prop_animation );
