@@ -46,8 +46,26 @@ static void dial_layer_update_proc( Layer *layer, GContext *ctx ) {
   graphics_context_set_antialiased( ctx, true );
   graphics_context_set_fill_color( ctx, BACKGROUND_COLOUR );
   graphics_fill_rect( ctx, bounds, 0, GCornerNone );
-  draw_seconds_ticks( & (DRAW_TICKS_PARAMS) { layer, ctx, &PATH_TICK, 5, 1, 12, TICKS_COLOUR, BACKGROUND_COLOUR } );
-  draw_seconds_ticks( & (DRAW_TICKS_PARAMS) { layer, ctx, &PATH_TICK, 15, 3, 15, TICKS_COLOUR, BACKGROUND_COLOUR } );
+  draw_seconds_ticks( & (DRAW_TICKS_PARAMS) { 
+    .layer = layer, 
+    .ctx = ctx, 
+    .p_gpath_info = &PATH_TICK, 
+    .increment = 5, 
+    .tick_thk = 1, 
+    .tick_length = 12, 
+    .tick_colour = TICKS_COLOUR, 
+    .bg_colour = BACKGROUND_COLOUR
+  } );
+  draw_seconds_ticks( & (DRAW_TICKS_PARAMS) {
+    .layer = layer,
+    .ctx = ctx,
+    .p_gpath_info = &PATH_TICK,
+    .increment = 15,
+    .tick_thk = 3,
+    .tick_length = 15,
+    .tick_colour = TICKS_COLOUR,
+    .bg_colour = BACKGROUND_COLOUR
+  } );
   graphics_context_set_stroke_color( ctx, BACKGROUND_COLOUR );
   graphics_context_set_stroke_width( ctx, CLOCK_TICK_EDGE_OFFSET );
   graphics_draw_round_rect( ctx, grect_inset( bounds, GEdgeInsets( CLOCK_TICK_EDGE_OFFSET / 2 ) ), 0 );

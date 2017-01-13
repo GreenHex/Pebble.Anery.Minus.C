@@ -23,6 +23,8 @@ void log_rect( char *str, GRect rect ) {
 }
 
 void draw_seconds_ticks( DRAW_TICKS_PARAMS *pDTP ) {
+  if ( ! pDTP->p_gpath_info ) return;
+  
   GRect bounds = layer_get_bounds( pDTP->layer );
   GPoint center_pt = grect_center_point( &bounds );
   GPath *gpath = gpath_create( pDTP->p_gpath_info );
@@ -42,21 +44,24 @@ void draw_seconds_ticks( DRAW_TICKS_PARAMS *pDTP ) {
 }
 
 void draw_gpath_hands( GPATH_HANDS_PARAMS *pGP ) {
-  GPath *gpath = gpath_create( pGP->gpath_hand );
-  GPath *gpath_highlight = gpath_create( pGP->gpath_hand_highlight );
+  if ( ! pGP->gpath_hand ) return;
   
   graphics_context_set_antialiased( pGP->ctx, true );
 
+  GPath *gpath = gpath_create( pGP->gpath_hand );
   gpath_rotate_to( gpath, pGP->angle );
   gpath_move_to( gpath, pGP->center_pt );
-  gpath_rotate_to( gpath_highlight, pGP->angle );
-  gpath_move_to( gpath_highlight, pGP->center_pt );
-
   graphics_context_set_fill_color( pGP->ctx, pGP->hand_colour );
   gpath_draw_filled( pGP->ctx, gpath );
   
-  graphics_context_set_fill_color( pGP->ctx, pGP->hand_highlight_colour );
-  gpath_draw_filled( pGP->ctx, gpath_highlight );
+  if ( pGP->gpath_hand_highlight ) {
+    GPath *gpath_highlight = gpath_create( pGP->gpath_hand_highlight );
+    gpath_rotate_to( gpath_highlight, pGP->angle );
+    gpath_move_to( gpath_highlight, pGP->center_pt );
+    graphics_context_set_fill_color( pGP->ctx, pGP->hand_highlight_colour );
+    gpath_draw_filled( pGP->ctx, gpath_highlight );
+    gpath_destroy( gpath_highlight );
+  }
   
   graphics_context_set_stroke_width( pGP->ctx, 1 );
   graphics_context_set_stroke_color( pGP->ctx, pGP->hand_outline_colour );
@@ -66,7 +71,6 @@ void draw_gpath_hands( GPATH_HANDS_PARAMS *pGP ) {
   graphics_fill_circle( pGP->ctx, pGP->center_pt, pGP->center_dot_radius );
   
   gpath_destroy( gpath );
-  gpath_destroy( gpath_highlight );
 }
 
 void draw_clock_hand( HAND_DRAW_PARAMS *pDP ) {
