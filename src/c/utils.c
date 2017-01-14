@@ -6,6 +6,22 @@
 #include "utils.h"
 #include "global.h"
 
+#if defined( PBL_COLOR )
+#define NUM_PBL_64_COLOURS 64
+
+const uint32_t PBL_64_COLOURS[ NUM_PBL_64_COLOURS ] = {
+  0x000000, 0xFFFFFF, 0xAAAAAA, 0x005555, 0xFFFFAA, 0xFFFF55, 0xFFAA55, 0xFF5500,
+  0xFF0000, 0xFF0055, 0xFF5555, 0xFFAAAA, 0xFFFF00, 0xFFAA00, 0xAA5500, 0xAA5555,
+  0xAA0000, 0xFF00AA, 0xFF55AA, 0xFFAAFF, 0x550000, 0xAA0055, 0xFF00FF, 0xFF55FF,
+  0x550055, 0xAA00AA, 0xAA55AA, 0x000055, 0x5500AA, 0xAA00FF, 0xAA55FF, 0x0000AA,
+  0x5500FF, 0x5555AA, 0x0055AA, 0x55AAAA, 0x55AA55, 0x00AA00, 0x00FF00, 0x55FF00,
+  0xAAFF55, 0xAAFF00, 0x55AA00, 0x005500, 0x005555, 0xAAAA55, 0x555500, 0xAAAA00,
+  0xAAFFAA, 0x55FF55, 0x00FF55, 0x00AA55, 0x00AAAA, 0x00AAFF, 0x0000FF, 0x5555FF,
+  0xAAAAFF, 0x55FFAA, 0x00FFAA, 0x00FFFF, 0x55AAFF, 0x0055FF, 0x55FFFF, 0xAAFFFF
+};
+#endif /* PBL_COLOR */
+
+
 // function is "adjusted"" for whole hours or minutes; "after" 9:00 AM or "upto" 9:00 AM.
 // "after" includes the hour, "upto" excludes the hour.
 bool is_X_in_range( int a, int b, int x ) { return ( ( b > a ) ? ( ( x >= a ) && ( x < b ) ) : ( ( x >= a ) || ( x < b ) ) ); };
@@ -35,6 +51,7 @@ void draw_seconds_ticks( DRAW_TICKS_PARAMS *pDTP ) {
     gpath_rotate_to( gpath, angle );
     gpath_move_to( gpath, center_pt );
     graphics_context_set_stroke_color( pDTP->ctx, pDTP->tick_colour );
+    // graphics_context_set_stroke_color( pDTP->ctx, PBL_IF_COLOR_ELSE( GColorFromHEX( PBL_64_COLOURS[ rand() % ( NUM_PBL_64_COLOURS - 3 ) + 3 ] ), pDTP->tick_colour ) );
     graphics_context_set_stroke_width( pDTP->ctx, pDTP->tick_thk );
     gpath_draw_outline( pDTP->ctx, gpath );
   }
