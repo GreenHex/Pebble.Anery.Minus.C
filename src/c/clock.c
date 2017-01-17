@@ -206,6 +206,7 @@ static void start_seconds_display( AccelAxisType axis, int32_t direction ) {
 
 static void unobstructed_change_proc( AnimationProgress progress, void *context ) {
   GRect uo_bounds = layer_get_unobstructed_bounds( (Layer *) context );
+  GRect bounds = layer_get_bounds( (Layer *) context );
   layer_set_bounds( dial_layer, uo_bounds );
   layer_set_bounds( hours_layer, uo_bounds );
   layer_set_bounds( minutes_layer, uo_bounds );
@@ -217,6 +218,10 @@ static void unobstructed_change_proc( AnimationProgress progress, void *context 
   battery_gauge_frame.origin.y = uo_bounds.origin.y + uo_bounds.size.h/2 - battery_gauge_frame.size.h/2;
   layer_set_frame( battery_layer, battery_gauge_frame );
   layer_mark_dirty( dial_layer );
+  GRect snooze_layer_frame = SNOOZE_LAYER_FRAME;
+  snooze_layer_frame.origin.y = snooze_layer_frame.origin.y * uo_bounds.size.h / bounds.size.h;
+  layer_set_frame( bitmap_layer_get_layer( snooze_layer ), snooze_layer_frame );
+  layer_mark_dirty( bitmap_layer_get_layer( snooze_layer ) );
 }
 
 void clock_init( Window* window ){
@@ -230,7 +235,7 @@ void clock_init( Window* window ){
   layer_set_update_proc( dial_layer, dial_layer_update_proc );
   layer_add_child( window_layer, dial_layer );
   
-  snooze_layer = bitmap_layer_create( SNOOZE_LAYER_RECT );
+  snooze_layer = bitmap_layer_create( SNOOZE_LAYER_FRAME );
   layer_set_update_proc( bitmap_layer_get_layer( snooze_layer ), snooze_layer_update_proc );
   layer_add_child( dial_layer, bitmap_layer_get_layer( snooze_layer ) );
   
