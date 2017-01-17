@@ -77,7 +77,7 @@ static void snooze_layer_update_proc( Layer *layer, GContext *ctx ) {
   if ( quiet_time_is_active() ) {
     GRect bounds = layer_get_bounds( layer );
     graphics_context_set_compositing_mode( ctx, GCompOpSet );
-    GBitmap *snooze_bitmap = gbitmap_create_with_resource( RESOURCE_ID_IMAGE_SNOOZE );
+    GBitmap *snooze_bitmap = gbitmap_create_with_resource( RESOURCE_ID_IMAGE_MOUSE );
     graphics_draw_bitmap_in_rect( ctx, snooze_bitmap, bounds );
     gbitmap_destroy( snooze_bitmap );
   }

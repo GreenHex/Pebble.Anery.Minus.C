@@ -11,8 +11,8 @@
         "resources": {
             "media": [
                 {
-                    "file": "images/action_bar_icon_snooze.png",
-                    "name": "IMAGE_SNOOZE",
+                    "file": "images/Mouse.png",
+                    "name": "IMAGE_MOUSE",
                     "targetPlatforms": [
                         "aplite",
                         "basalt",
