@@ -14,6 +14,7 @@ tm tm_time;
 
 static Layer *window_layer = 0;
 static Layer *dial_layer = 0;
+static BitmapLayer *snooze_layer = 0;
 static Layer *hours_layer = 0;
 static Layer *minutes_layer = 0;
 static Layer *seconds_layer = 0;
@@ -69,6 +70,17 @@ static void dial_layer_update_proc( Layer *layer, GContext *ctx ) {
   graphics_context_set_stroke_color( ctx, BACKGROUND_COLOUR );
   graphics_context_set_stroke_width( ctx, CLOCK_TICK_EDGE_OFFSET );
   graphics_draw_round_rect( ctx, grect_inset( bounds, GEdgeInsets( CLOCK_TICK_EDGE_OFFSET / 2 ) ), 0 );
+ 
+}
+
+static void snooze_layer_update_proc( Layer *layer, GContext *ctx ) {
+  if ( quiet_time_is_active() ) {
+    GRect bounds = layer_get_bounds( layer );
+    graphics_context_set_compositing_mode( ctx, GCompOpSet );
+    GBitmap *snooze_bitmap = gbitmap_create_with_resource( RESOURCE_ID_IMAGE_SNOOZE );
+    graphics_draw_bitmap_in_rect( ctx, snooze_bitmap, bounds );
+    gbitmap_destroy( snooze_bitmap );
+  }
 }
 
 static void hours_layer_update_proc( Layer *layer, GContext *ctx ) {
@@ -218,6 +230,10 @@ void clock_init( Window* window ){
   layer_set_update_proc( dial_layer, dial_layer_update_proc );
   layer_add_child( window_layer, dial_layer );
   
+  snooze_layer = bitmap_layer_create( SNOOZE_LAYER_RECT );
+  layer_set_update_proc( bitmap_layer_get_layer( snooze_layer ), snooze_layer_update_proc );
+  layer_add_child( dial_layer, bitmap_layer_get_layer( snooze_layer ) );
+  
   date_init( dial_layer );
   battery_init( dial_layer );
   
@@ -258,5 +274,6 @@ void clock_deinit( void ){
   if ( hours_layer ) layer_destroy( hours_layer );
   battery_deinit();
   date_deinit();
+  if ( snooze_layer ) bitmap_layer_destroy( snooze_layer );
   if ( dial_layer ) layer_destroy( dial_layer );
 }

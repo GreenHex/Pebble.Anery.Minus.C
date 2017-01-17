@@ -11,6 +11,17 @@
         "resources": {
             "media": [
                 {
+                    "file": "images/action_bar_icon_snooze.png",
+                    "name": "IMAGE_SNOOZE",
+                    "targetPlatforms": [
+                        "aplite",
+                        "basalt",
+                        "diorite",
+                        "emery"
+                    ],
+                    "type": "bitmap"
+                },
+                {
                     "characterRegex": "[A-Z]",
                     "file": "fonts/Inconsolata-Regular.ttf",
                     "name": "FONT_INCONSOLATA_REGULAR_16",

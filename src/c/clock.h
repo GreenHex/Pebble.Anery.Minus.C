@@ -14,6 +14,8 @@
 #define CLOCK_DIAL_RECT ( GRect( CLOCK_DIAL_POS_X, CLOCK_DIAL_POS_Y, CLOCK_DIAL_SIZE_W, CLOCK_DIAL_SIZE_H ) )
 #define CLOCK_TICK_EDGE_OFFSET 3 /* make it an odd number */
 
+#define SNOOZE_LAYER_RECT ( GRect( PBL_DISPLAY_WIDTH / 2 - 18 / 2, 36, 18, 18 ) )
+
 // #define USE_GPATH_SECONDS_HAND
 
 static GPathInfo PATH_TICK = {
