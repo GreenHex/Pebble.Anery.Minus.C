@@ -16,7 +16,7 @@ static TextLayer *date_text_layer = 0;
 
 static void outer_window_layer_update_proc( Layer *layer, GContext *ctx ) {
   GRect bounds = layer_get_bounds( layer );
-  graphics_context_set_fill_color( ctx, PBL_IF_COLOR_ELSE( GColorLightGray, GColorDarkGray ) );
+  graphics_context_set_fill_color( ctx, PBL_IF_COLOR_ELSE( GColorDarkGray, GColorDarkGray ) );
   graphics_fill_rect( ctx, bounds, OUTER_WINDOW_OUTLINE_THK, GCornersAll );
 
   graphics_context_set_fill_color( ctx, GColorLightGray );
