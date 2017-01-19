@@ -93,12 +93,12 @@ static void hours_layer_update_proc( Layer *layer, GContext *ctx ) {
     .center_pt = center_pt, 
     .angle = hour_angle, 
     .gpath_hand = &HOUR_HAND_SBGE001_POINTS, 
-    .gpath_hand_highlight = 0, /* &HOUR_HAND_SBGE001_POINTS_HIGHLIGHT, */
-    .hand_colour = GColorDarkGray, /* HAND_COLOUR, */
-    .hand_highlight_colour = GColorBlack, /* HAND_HIGHLIGHT_COLOUR, */
-    .hand_outline_colour = GColorBlack, /* HAND_OUTLINE_COLOUR, */
+    .gpath_hand_highlight = &HOUR_HAND_SBGE001_POINTS_HIGHLIGHT,
+    .hand_colour = HAND_COLOUR,
+    .hand_highlight_colour = HAND_HIGHLIGHT_COLOUR,
+    .hand_outline_colour = HAND_OUTLINE_COLOUR,
     .center_dot_radius = 2,
-    .center_dot_colour = GColorBlack, /* BACKGROUND_COLOUR */
+    .center_dot_colour = GColorLightGray /* BACKGROUND_COLOUR */
   } );
 }
 
@@ -112,12 +112,12 @@ static void minutes_layer_update_proc( Layer *layer, GContext *ctx ) {
     .center_pt = center_pt, 
     .angle = minute_angle, 
     .gpath_hand = &MINUTE_HAND_SBGE001_POINTS, 
-    .gpath_hand_highlight = 0, /* &MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT, */
-    .hand_colour = GColorDarkGray, /* HAND_COLOUR, */
-    .hand_highlight_colour = GColorBlack, /* HAND_HIGHLIGHT_COLOUR, */
-    .hand_outline_colour = GColorBlack, /* HAND_OUTLINE_COLOUR, */
+    .gpath_hand_highlight = &MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT,
+    .hand_colour = HAND_COLOUR,
+    .hand_highlight_colour = HAND_HIGHLIGHT_COLOUR,
+    .hand_outline_colour = HAND_OUTLINE_COLOUR,
     .center_dot_radius = 2,
-    .center_dot_colour = GColorBlack, /* BACKGROUND_COLOUR */
+    .center_dot_colour = CENTER_DOT_COLOUR
   } );
 }
 
@@ -140,7 +140,7 @@ static void seconds_layer_update_proc( Layer *layer, GContext *ctx ) {
     .hand_highlight_colour = GColorRed,
     .hand_outline_colour = GColorRed,
     .center_dot_radius = 3,
-    .center_dot_colour = GColorBlack
+    .center_dot_colour = CENTER_DOT_COLOUR
   } );
 }
 #else

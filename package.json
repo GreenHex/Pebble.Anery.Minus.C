@@ -2,9 +2,9 @@
     "author": "The Resetter",
     "dependencies": {},
     "keywords": [],
-    "name": "anery",
+    "name": "anery-v1.15",
     "pebble": {
-        "displayName": "Anery- v1.14",
+        "displayName": "Anery-",
         "enableMultiJS": true,
         "messageKeys": [],
         "projectType": "native",
@@ -65,13 +65,12 @@
         "targetPlatforms": [
             "aplite",
             "basalt",
-            "diorite",
-            "emery"
+            "diorite"
         ],
         "uuid": "049abcdd-23b0-4189-b616-c7a1bb91c9d1",
         "watchapp": {
             "watchface": true
         }
     },
-    "version": "1.14.0"
+    "version": "1.15.0"
 }

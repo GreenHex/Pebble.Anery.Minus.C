@@ -85,6 +85,13 @@ static GPathInfo HOUR_HAND_SBGE001_POINTS = {
 };
 
 static GPathInfo HOUR_HAND_SBGE001_POINTS_HIGHLIGHT = {
+  2, (GPoint []) {
+    { 0, 8 },
+    { 0, -22 },
+  }
+};
+
+static GPathInfo HOUR_HAND_SBGE001_POINTS_HIGHLIGHT_2 = {
   4, (GPoint []) {
     { 0, 14 },
     { 3, 14 },
@@ -104,6 +111,13 @@ static GPathInfo MINUTE_HAND_SBGE001_POINTS = {
 };
 
 static GPathInfo MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT = {
+  2, (GPoint []) {
+    { 0, 8 },
+    { 0, -28 },
+  }
+};
+
+static GPathInfo MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT_2 = {
   4, (GPoint []) {
     { 0, 14 },
     { -3, 14 },
