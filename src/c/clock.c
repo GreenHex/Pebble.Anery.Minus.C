@@ -53,7 +53,7 @@ static void dial_layer_update_proc( Layer *layer, GContext *ctx ) {
     .p_gpath_info = &PATH_TICK, 
     .increment = 5, 
     .tick_thk = 1, 
-    .tick_length = 12, 
+    .tick_length = 8, 
     .tick_colour = TICKS_COLOUR, 
     .bg_colour = BACKGROUND_COLOUR
   } );
@@ -63,7 +63,7 @@ static void dial_layer_update_proc( Layer *layer, GContext *ctx ) {
     .p_gpath_info = &PATH_TICK,
     .increment = 15,
     .tick_thk = 3,
-    .tick_length = 15,
+    .tick_length = 12,
     .tick_colour = TICKS_COLOUR, 
     .bg_colour = BACKGROUND_COLOUR
   } );
@@ -93,7 +93,7 @@ static void hours_layer_update_proc( Layer *layer, GContext *ctx ) {
     .center_pt = center_pt, 
     .angle = hour_angle, 
     .gpath_hand = &HOUR_HAND_SBGE001_POINTS, 
-    .gpath_hand_highlight = &HOUR_HAND_SBGE001_POINTS_HIGHLIGHT,
+    .gpath_hand_highlight = &HOUR_HAND_SBGE001_POINTS_HIGHLIGHT_2,
     .hand_colour = HAND_COLOUR,
     .hand_highlight_colour = HAND_HIGHLIGHT_COLOUR,
     .hand_outline_colour = HAND_OUTLINE_COLOUR,
@@ -112,7 +112,7 @@ static void minutes_layer_update_proc( Layer *layer, GContext *ctx ) {
     .center_pt = center_pt, 
     .angle = minute_angle, 
     .gpath_hand = &MINUTE_HAND_SBGE001_POINTS, 
-    .gpath_hand_highlight = &MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT,
+    .gpath_hand_highlight = &MINUTE_HAND_SBGE001_POINTS_HIGHLIGHT_2,
     .hand_colour = HAND_COLOUR,
     .hand_highlight_colour = HAND_HIGHLIGHT_COLOUR,
     .hand_outline_colour = HAND_OUTLINE_COLOUR,

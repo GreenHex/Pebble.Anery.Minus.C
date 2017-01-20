@@ -77,9 +77,11 @@ void draw_gpath_hands( GPATH_HANDS_PARAMS *pGP ) {
     gpath_move_to( gpath_highlight, pGP->center_pt );
     graphics_context_set_fill_color( pGP->ctx, pGP->hand_highlight_colour );
     gpath_draw_filled( pGP->ctx, gpath_highlight );
+    /*
     graphics_context_set_stroke_width( pGP->ctx, 1 );
     graphics_context_set_stroke_color( pGP->ctx, pGP->hand_highlight_colour );
     gpath_draw_outline( pGP->ctx, gpath_highlight );
+    */
     gpath_destroy( gpath_highlight );
   }
   
