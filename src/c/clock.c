@@ -51,9 +51,23 @@ static void dial_layer_update_proc( Layer *layer, GContext *ctx ) {
     .layer = layer, 
     .ctx = ctx, 
     .p_gpath_info = &PATH_TICK, 
+    .increment = 1, 
+    .tick_thk = 1, 
+    .tick_length = 6,
+    #ifdef REVERSE
+    .tick_colour = GColorLightGray, 
+    #else
+    .tick_colour = GColorDarkGray, 
+    #endif
+    .bg_colour = BACKGROUND_COLOUR
+  } );
+  draw_seconds_ticks( & (DRAW_TICKS_PARAMS) { 
+    .layer = layer, 
+    .ctx = ctx, 
+    .p_gpath_info = &PATH_TICK, 
     .increment = 5, 
     .tick_thk = 1, 
-    .tick_length = 8, 
+    .tick_length = 10, 
     .tick_colour = TICKS_COLOUR, 
     .bg_colour = BACKGROUND_COLOUR
   } );
@@ -63,7 +77,7 @@ static void dial_layer_update_proc( Layer *layer, GContext *ctx ) {
     .p_gpath_info = &PATH_TICK,
     .increment = 15,
     .tick_thk = 3,
-    .tick_length = 12,
+    .tick_length = 15,
     .tick_colour = TICKS_COLOUR, 
     .bg_colour = BACKGROUND_COLOUR
   } );
@@ -77,7 +91,11 @@ static void snooze_layer_update_proc( Layer *layer, GContext *ctx ) {
   if ( quiet_time_is_active() ) {
     GRect bounds = layer_get_bounds( layer );
     graphics_context_set_compositing_mode( ctx, GCompOpSet );
-    GBitmap *snooze_bitmap = gbitmap_create_with_resource( RESOURCE_ID_IMAGE_MOUSE );
+    #ifdef REVERSE
+    GBitmap *snooze_bitmap = gbitmap_create_with_resource( RESOURCE_ID_IMAGE_MOUSE_W );
+    #else
+    GBitmap *snooze_bitmap = gbitmap_create_with_resource( RESOURCE_ID_IMAGE_MOUSE_B );
+    #endif
     graphics_draw_bitmap_in_rect( ctx, snooze_bitmap, bounds );
     gbitmap_destroy( snooze_bitmap );
   }

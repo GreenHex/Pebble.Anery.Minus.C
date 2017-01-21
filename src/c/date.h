@@ -6,7 +6,11 @@
 #include <pebble.h>
 #include "global.h"
 
-#define OUTER_WINDOW_OUTLINE_THK 2
+#ifdef REVERSE
+#define OUTER_WINDOW_OUTLINE_THK 3
+#else
+#define OUTER_WINDOW_OUTLINE_THK 3
+#endif
 
 #if PBL_DISPLAY_WIDTH == 200
 #define DAY_WINDOW_SIZE_W 28

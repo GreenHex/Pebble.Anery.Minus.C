@@ -7,7 +7,7 @@
 
 // #define DEBUG
 
-#define REVERSE
+// #define REVERSE
 #ifdef REVERSE
 
 #define BACKGROUND_COLOUR GColorWhite
